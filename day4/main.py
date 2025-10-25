@@ -14,6 +14,7 @@ def main():
     #Need to create a function that checks directions from -1, -1 to 1, 1 while ignoring 0, 0
     #The function need to return the number of valid discovered (8 max per run)
     #The function needs to check the bounds and skip that direction if it were to go out of bounds
+    
 
     """
     #To test a specific letter in the table
