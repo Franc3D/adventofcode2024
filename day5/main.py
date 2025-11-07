@@ -6,29 +6,51 @@ def main():
 
     compare_list, page_list = split_data_in_lists()
 
-    valid_set_pages = []
+    valid_set_pages = 0
 
     for pages_string in page_list:
         page_valid = True
         pages = pages_string.split(",")
+        compare_invalid = ""
 
         for compare in compare_list:
-            if is_following_rules(compare, pages) == False: #NEED TO FINISH THIS FUNCTION
+            if is_following_rules(compare, pages_string) == False: 
+                compare_invalid = compare
                 page_valid = False
                 break
-        
+
+        print("The pages", pages_string, end=" are ")
         if page_valid:
-            valid_set_pages.append(pages)
+            print("VALID, adding", pages[int(len(pages)//2)], "to the total")
+            valid_set_pages += int(pages[int(len(pages)//2)])
         else:
+            print("INVALID due to the comparaison", compare_invalid)
             continue
+    
+    print("The total of all the middle values of the valid page groups is", valid_set_pages)
         
 
 
 
-def is_following_rules(compare, pages):
+def is_following_rules(compare, pages_string):
 
     #split the compare string into the before and after 
     before, after = compare.split("|")
+
+    location_before = pages_string.find(before)
+    location_after = pages_string.find(after)
+
+    if location_before == -1 or location_after == -1:
+        return True
+        
+    else:
+        
+        if location_before < location_after:
+            return True
+        else:
+            return False
+
+    #could use pages_string instead and do a find() to see if the returned value is <=> compared to the 2nd compare
 
 
 def split_data_in_lists(verbose = False):
